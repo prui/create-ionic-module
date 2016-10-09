@@ -1,7 +1,6 @@
 (function() {
     var fs = require('fs');
     var path = require('path');
-    var isIonSideMemus = false;
     module.exports = {
         init: init
     };
