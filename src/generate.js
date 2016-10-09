@@ -1,49 +1,55 @@
 (function() {
     var fs = require('fs');
     var path = require('path');
+    var isIonSideMemus = false;
     module.exports = {
         init: init
     };
 
-    function init(name) {
+    function init(name, type) {
         fs.exists(name, function(result) {
             if (!result) {
                 fs.mkdirSync(name);
             }
-            generateFiles(name);
+            generateFiles(name, type);
         });
     }
 
-    function generateFiles(name) {
-        generateModuleJS(name);
-        generateHtml(name);
-        generateContorller(name);
-        generateService(name);
-        generateRouter(name);
+    function generateFiles(name, type) {
+        generateModuleJS(name, type);
+        generateHtml(name, type);
+        generateContorller(name, type);
+        generateService(name, type);
+        generateRouter(name, type);
     }
 
-    function generateModuleJS(name) {
-        writeFile(name, '.js', 'ModuleJS');
+    function generateModuleJS(name, type) {
+        writeFile(name, '.js', 'ModuleJS', type);
     }
 
-    function generateHtml(name) {
-        writeFile(name, '.html', 'Html');
+    function generateHtml(name, type) {
+        writeFile(name, '.html', 'Html', type);
     }
 
-    function generateContorller(name) {
-        writeFile(name, 'Ctrl.js', 'Contorller');
+    function generateContorller(name, type) {
+        writeFile(name, 'Ctrl.js', 'Contorller', type);
     }
 
-    function generateService(name) {
-        writeFile(name, 'Service.js', 'Service');
+    function generateService(name, type) {
+        writeFile(name, 'Service.js', 'Service', type);
     }
 
-    function generateRouter(name) {
-        writeFile(name, 'Router.js', 'Router');
+    function generateRouter(name, type) {
+        writeFile(name, 'Router.js', 'Router', type);
     }
 
-    function writeFile(name, suffix, tag) {
-        var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
+    function writeFile(name, suffix, tag, type) {
+        if (tag == 'Router' && type == 'ionSideMenus') {
+            var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
+        } else {
+            var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
+        }
+        // var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
         var newFileText = temp.toString().replace(/Base/g, name);
 
         if (tag == 'Router') {
