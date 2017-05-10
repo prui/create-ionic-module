@@ -1,20 +1,18 @@
-(function() {
-  'use strict';
+import Base from './Base.html';
+import BaseCtrl from './BaseCtrl';
 
-  angular.module('BaseRouter', [])
-    .config(BaseRouter);
-
-
-  function BaseRouter($stateProvider, USER_ROLES, $urlRouterProvider) {
+export default function BaseRouter($stateProvider) {
     'ngInject';
     $stateProvider
-      .state('Base', {
-        url: "/base",
-        templateUrl: 'Base/Base.html',
-        controller: 'BaseCtrl',
-        controllerAs: 'vm',
-        allowAnonymous: true,
-        authorizedRoles: [USER_ROLES.all]
-      });
-  }
-}());
+        .state('app.Base', {
+            url: '/base',
+            views: {
+                'menuContent': {
+                    templateUrl: Base,
+                    controller: BaseCtrl,
+                    controllerAs: 'vm'
+                }
+            },
+            authentication: 'all'
+        });
+};

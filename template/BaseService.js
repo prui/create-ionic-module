@@ -1,16 +1,11 @@
-(function() {
-  'use strict';
-
-  angular.module('BaseService', [])
-    .factory('BaseService', BaseService);
-
-  function BaseService( $q, $http) {
+export default function BaseService($q, $http, HttpService) {
     'ngInject';
     var service = {
+        getData: getData,
     };
     return service;
 
 
-  }
+    function getData() {}
 
-}());
+}
