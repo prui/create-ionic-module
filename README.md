@@ -12,5 +12,4 @@ Create-ionic-module
 * yourModuleName 对应你的模块名字
 ```bash
   cim yourModuleName
-  cismm yourIonSideMenusProjectModuleName
 ```
