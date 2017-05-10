@@ -43,12 +43,12 @@
     }
 
     function writeFile(name, suffix, tag, type) {
-        // if (tag == 'Router' && type == 'ionSideMenus') {
-        //     var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'ISMBase' + suffix));
-        // } else {
-        //     var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
-        // }
-        var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
+        if (tag == 'Router' && type == 'ionSideMenus') {
+            var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'ISMBase' + suffix));
+        } else {
+            var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
+        }
+        // var temp = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'Base' + suffix));
         var newFileText = temp.toString().replace(/Base/g, name);
 
         if (tag == 'Router') {
